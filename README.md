@@ -3,6 +3,7 @@
 ## 📅 목차
 
 - [2025-08-05](#2025-08-05)
+- [2025-08-06](#2025-08-06)
 
 <br><br><br>
 
@@ -124,3 +125,246 @@ li#기준 + li { color: green; }  /* 바로 다음 형제 */
 📅[목차로 돌아가기](#-목차)
 
 ---
+
+# 2025-08-06
+
+### JavaScript 주요 개념 및 예제 정리
+
+---
+
+#### 1. 변수 선언 (ES6 기준)
+
+* `let`: 블록 스코프, 재선언 불가
+* `const`: 상수, 블록 스코프, 재할당 불가
+* `var`: 함수 스코프, 중복 선언 가능, 전역에서는 `window` 프로퍼티로 작동
+* 예:
+
+  ```js
+  let a = 10;
+  const b = '가나다';
+  var c = true;
+  console.info(a, b, c);
+  ```
+
+---
+
+#### 2. 데이터 타입 및 형변환
+
+* `typeof` 사용 예:
+
+  ```js
+  typeof 10;        // number  
+  typeof '12345';   // string  
+  typeof function() {};  // function  
+  typeof [];        // object (배열도 객체)  
+  ```
+* 암시적 형변환 예:
+
+  ```js
+  1 + '2';       // "12" (문자열 결합)  
+  '1' / 2;       // 0.5 (숫자 연산)  
+  Number('123'); // 123  
+  Number('abcd'); // NaN  
+  isNaN(Number('123abcd')); // true
+  ```
+* 템플릿 문자열:
+
+  ```js
+  console.log(`1+2=${1 + 2}`);
+  ```
+
+---
+
+#### 3. 비교 연산자
+
+* `==` : 값만 비교 (느슨한 비교)
+* `===`: 값과 타입 모두 비교 (엄격한 비교)
+
+```js
+console.log(123 == '123');  // true  
+console.log(123 === '123'); // false
+```
+
+---
+
+#### 4. 구조 분해 할당
+
+* 배열:
+
+  ```js
+  let [d, e, f] = [1, 2, 3];
+  let [g=0, h=0, i=0] = [1, 2];
+  ```
+* 객체:
+
+  ```js
+  let { p1, p2, p3 } = { p1:1, p2:'str', p3:true };
+  ```
+
+---
+
+#### 5. 배열 및 반복문
+
+* 기본 반복문: `for`, `for...in`, `for...of`
+* 고차 함수: `forEach`, `map`, `filter`, `reduce`, `some`, `every`
+* 예:
+
+  ```js
+  let ary = [100, 200, 300, 400, 500];
+  ary.forEach(item => console.log(item));
+  let total = ary.filter(x => x >= 300).reduce((tot, x) => tot + x, 0);
+  let hasBig = ary.some(x => x >= 500);
+  ```
+
+---
+
+#### 6. `this`와 호이스팅
+
+* `var` 변수와 함수 선언은 호이스팅되어 코드 최상단으로 끌어올려진 듯 동작함
+* `let`, `const`는 호이스팅되지만 초기화 이전에는 접근 불가(Temporal Dead Zone)
+* 전역 `var` 변수는 `window` 객체 프로퍼티가 됨
+* 예:
+
+  ```js
+  var name = '가';
+  let name1 = '나';
+
+  console.log(name, name1);
+  console.log(this.name, this.name1);
+  console.log(window.name, window.name1);
+
+  test(); // 함수 호이스팅으로 정상 호출
+  function test() {
+      var name = 'A';
+      console.log(name);
+      console.log(this.name);
+  }
+  ```
+
+---
+
+#### 7. 함수 매개변수
+
+* 기본값 매개변수
+* 나머지 매개변수 (`...args`)
+* 전개 연산자 (`...arr`)
+* 예:
+
+  ```js
+  function add(a, b = 0) {
+    return a + b;
+  }
+
+  function addAll(...args) {
+    return args.reduce((sum, val) => sum + val, 0);
+  }
+
+  let arr = [1, 2, 3];
+  console.log(...arr);
+  ```
+
+---
+
+#### 8. 불변 객체와 함수형 프로그래밍
+
+* 객체 복사 및 확장:
+
+  ```js
+  const obj = { name: '홍길동', age: 20 };
+  const obj2 = { ...obj, age: 30, addr: '광주' };
+  ```
+* 함수형 예:
+
+  ```js
+  function add4(a, b, ...fns) {
+    let c = 0;
+    fns.forEach(f => c += f(a, b));
+    return c;
+  }
+  ```
+
+---
+
+#### 9. 객체 리터럴과 생성자 함수
+
+* 리터럴 객체 메서드 정의
+* 생성자 함수와 프로토타입 메서드
+* 예:
+
+  ```js
+  const calc = {
+    a: 1,
+    b: 2,
+    add() { return this.a + this.b; }
+  };
+
+  function Calc3(a, b) {
+    this.a = a;
+    this.b = b;
+  }
+  Calc3.prototype.add = function() {
+    return this.a + this.b;
+  }
+  let obj3 = new Calc3(1, 2);
+  ```
+
+---
+
+#### 10. 클래스 및 상속
+
+* ES6 클래스, getter, 메서드
+* 상속 `extends` 및 `super()`
+* 예:
+
+  ```js
+  class Polygon {
+    constructor(height, width) {
+      this.height = height;
+      this.width = width;
+    }
+    get area() {
+      return this.height * this.width;
+    }
+    print() {
+      console.log('면적: ' + this.area);
+    }
+  }
+
+  class Square extends Polygon {
+    constructor(length) {
+      super(length, length);
+    }
+  }
+  ```
+
+---
+
+#### 11. 비동기 처리 및 Ajax (jQuery, Axios, Fetch)
+
+* jQuery `$.get`과 `done`, `fail`
+* Axios `axios.get`과 `then`, `catch`
+* Fetch API `fetch()`와 Promise 처리
+* async/await 예시도 가능
+* 예:
+
+  ```js
+  $.get('msg.json', {}, function(data) {
+    console.log('jQuery:', data);
+  });
+
+  axios.get('msg.json')
+    .then(res => console.log('Axios:', res.data))
+    .catch(err => console.log('Error:', err));
+
+  fetch('msg.json')
+    .then(res => res.json())
+    .then(data => console.log('Fetch:', data))
+    .catch(err => console.log('Error:', err));
+  ```
+  
+---
+
+📅[목차로 돌아가기](#-목차)
+
+---
+
