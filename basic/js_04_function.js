@@ -26,14 +26,14 @@ function add3(...a) {
 console.log(add3(1, 2, 3));
 console.log(add3(1, 2, 3, 4, 5, 6, 77));
 
-// 전개구문
+// 전개구문(복제, 깊은복제)
 let arr = [1, 2, 3, 4, 5];
 console.log(...arr);
 
 let str = 'hello';
 console.log(...str);
 
-// 불변형 프로그래밍
+// 불변형 프로그래밍 - 원본보존
 const obj = { name: '홍길동', age: 20 }; // 불변형
 const obj2 = { ...obj, age: 30, addr: '광주' };
 console.log(obj, obj2);
