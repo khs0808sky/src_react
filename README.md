@@ -4,6 +4,7 @@
 
 - [2025-08-05](#2025-08-05)
 - [2025-08-06](#2025-08-06)
+- [2025-08-07](#2025-08-07)
 
 <br><br><br>
 
@@ -367,4 +368,83 @@ console.log(123 === '123'); // false
 📅[목차로 돌아가기](#-목차)
 
 ---
+
+## 2025-08-07
+
+---
+
+### ✅ React에 대해
+
+* 자바스크립트 기반의 **UI 라이브러리**
+* SPA(Single Page Application) 구현에 최적화
+* 선언형(Declarative) 방식으로 UI 구성 → 코드가 간결하고 예측 가능
+* 컴포넌트(Component) 기반 아키텍처 → 재사용성, 유지보수 용이
+
+---
+
+### ✅ CRA (Create React App)
+
+* 리액트 프로젝트를 **빠르게 시작**할 수 있도록 돕는 CLI 도구
+* 복잡한 환경 설정 없이 실행 가능한 기본 구성 제공
+* 주요 명령어:
+
+  * `npx create-react-app 프로젝트명`
+  * `npm start`, `npm run build` 등
+
+---
+
+### ✅ 모듈(Module)
+
+* \*\*자바스크립트의 모듈 시스템(ES Modules)\*\*을 이용
+* 하나의 파일을 **기능 단위로 나눠서 관리**
+* `import`, `export` 문법 사용
+
+  ```js
+  export default 함수명;  // 내보내기  
+  import 함수명 from './파일명';  // 불러오기
+  ```
+
+---
+
+### ✅ 컴포넌트(Component)
+
+* **UI를 구성하는 최소 단위**
+* 함수형(functional) 컴포넌트가 일반적
+* JSX 문법을 사용해 마크업 작성
+
+  ```jsx
+  function Greeting() {
+    return <h1>Hello, world!</h1>;
+  }
+  ```
+
+---
+
+### ✅ props (Properties)
+
+* **부모 → 자식**으로 데이터 전달할 때 사용
+* 읽기 전용 (불변성 유지)
+* 객체 형태로 전달되며, JSX 내에서 `{}`로 접근
+
+  ```jsx
+  function Welcome(props) {
+    return <h1>안녕, {props.name}!</h1>;
+  }
+
+  <Welcome name="현수" />
+  ```
+* 구조 분해 할당으로 더 깔끔하게 작성 가능
+
+  ```jsx
+  function Welcome({ name }) {
+    return <h1>안녕, {name}!</h1>;
+  }
+  ```
+
+---
+
+📅[목차로 돌아가기](#-목차)
+
+---
+
 
