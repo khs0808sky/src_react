@@ -5,6 +5,7 @@
 - [2025-08-05](#2025-08-05)
 - [2025-08-06](#2025-08-06)
 - [2025-08-07](#2025-08-07)
+- [2025-08-08](#2025-08-08)
 
 <br><br><br>
 
@@ -447,4 +448,110 @@ console.log(123 === '123'); // false
 
 ---
 
+## 2025-08-08
+
+---
+
+### 1. **React에서 상태 관리와 CRUD 구현**
+
+* **`useState`**
+
+  * 상태(state)를 관리하기 위한 Hook.
+  * 상태 값이 변경되면 컴포넌트가 리렌더링됨.
+  * 예:
+
+    ```js
+    const [mode, setMode] = useState('WELCOME');
+    const [topics, setTopics] = useState([...]);
+    ```
+* **상태 변경 흐름**
+
+  * 자식 컴포넌트에서 이벤트 발생 → props로 받은 함수 호출 → 부모 컴포넌트의 state 변경 → 리렌더링
+* **CRUD 예시**
+
+  * **Create**: 새 데이터 추가 → `setTopics([...topics, newTopic])`
+  * **Read**: 특정 id 데이터 조회 → `topics.filter()` 또는 반복문
+  * **Update**: 데이터 수정 → 배열 복사 후 해당 항목 수정
+  * **Delete**: id가 일치하지 않는 항목만 필터링하여 새 배열 생성 후 `setTopics()`
+
+---
+
+### 2. **React 컴포넌트 구조**
+
+* **`Header`**
+
+  * 제목 표시, 클릭 시 `mode` 변경
+* **`Nav`**
+
+  * topics 목록 렌더링, 항목 클릭 시 해당 id로 `READ` 모드 전환
+* **`Article`**
+
+  * title, body 표시
+* **`Create`**
+
+  * 폼 입력 → 부모로 title, body 전달
+* **`Update`**
+
+  * 기존 데이터 상태를 `useState`로 바인딩하여 폼 수정 가능하게 구현
+* **`App`**
+
+  * mode 상태에 따라 다른 컴포넌트 렌더링 (조건부 렌더링)
+
+---
+
+### 3. **이벤트 처리**
+
+* `onClick`, `onSubmit` 사용
+* `e.preventDefault()` 로 기본 동작(페이지 새로고침) 방지
+* 이벤트 안에서 props로 전달받은 함수 호출하여 부모 state 변경
+
+---
+
+### 4. **React Router DOM**
+
+* **설치**
+
+  ```bash
+  npm install react-router-dom
+  ```
+* **기본 구성 요소**
+
+  * `BrowserRouter` 또는 `HashRouter` : 라우팅 환경 제공
+  * `Routes` & `Route` : URL 경로에 따라 컴포넌트 렌더링
+  * `Link` : 페이지 전환 시 새로고침 없이 이동
+  * `NavLink` : 활성화된 링크 스타일 적용 가능
+  * `useParams` : URL 파라미터 값 가져오기
+* **예시**
+
+  ```jsx
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/topics/*" element={<Topics />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="*" element={'Not Found'} />
+  </Routes>
+  ```
+* **중첩 라우팅**
+
+  * `Topics` 안에서 `Route path="/:topic_id"` 작성 → `/topics/1` 형태로 접속 가능
+* **URL 파라미터 활용**
+
+  ```jsx
+  const { topic_id } = useParams();
+  const topic = contents.find(c => c.id === Number(topic_id));
+  ```
+
+---
+
+### 5. **기타 학습 포인트**
+
+* **key 속성** : React에서 리스트 렌더링 시 요소 식별을 위해 사용
+* **배열 복사** : `const newTopics = [...topics]` → 기존 배열 불변성 유지
+* **조건부 렌더링** : `if / else` 또는 삼항 연산자 활용
+
+---
+
+📅 [목차로 돌아가기](#-목차)
+
+---
 
