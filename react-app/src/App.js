@@ -150,6 +150,19 @@ function App() {
     let content = null;
     let contentControl = null;
 
+    const ajax = async () => {
+        const res = await axios.get('http://localhost:3000/topics.json', {
+            params: {},
+            withCredentials: true,
+        });
+
+        return res.data;
+    };
+
+    ajax.then((result) => {
+        setTopics(result.data);
+    });
+
     if (mode === 'WELCOME') {
         content = <Article title="Welcome" body="Hello, Web" />;
     } else if (mode === 'READ') {
